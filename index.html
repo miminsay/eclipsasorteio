@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>Eclipsa Sorteio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+margin:0;
+height:100vh;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+background: radial-gradient(circle,#1b0033,#000);
+font-family:Arial;
+color:white;
+overflow:hidden;
+}
+
+h1{
+font-size:40px;
+letter-spacing:3px;
+margin-bottom:40px;
+text-shadow:0 0 15px #ff00ff;
+}
+
+.roleta{
+font-size:180px;
+cursor:pointer;
+transition: transform 4s cubic-bezier(.17,.67,.13,.99);
+filter: drop-shadow(0 0 20px #ff00ff);
+}
+
+.roleta.girando{
+animation:giro 4s ease-out forwards;
+}
+
+@keyframes giro{
+0%{transform:rotate(0deg) scale(1);}
+50%{transform:rotate(720deg) scale(1.2);}
+100%{transform:rotate(1440deg) scale(1);}
+}
+
+button{
+margin-top:60px;
+font-size:20px;
+padding:15px 40px;
+border:none;
+border-radius:40px;
+background:linear-gradient(45deg,#ff00cc,#6a00ff);
+color:white;
+cursor:pointer;
+box-shadow:0 0 20px #ff00ff;
+}
+
+button:hover{
+transform:scale(1.1);
+}
+
+#resultado{
+margin-top:30px;
+font-size:34px;
+font-weight:bold;
+text-align:center;
+color:white;
+text-shadow:0 0 15px #ff00ff,0 0 30px #ff00ff;
+max-width:90%;
+}
+</style>
+</head>
+
+<body>
+
+<h1>ECLIPSA SORTEIO</h1>
+
+<div id="roleta" class="roleta">🎰</div>
+
+<button onclick="girar()">GIRAR ROLETA</button>
+
+<p id="resultado"></p>
+
+<audio id="som">
+<source src="https://assets.mixkit.co/active_storage/sfx/2018/2018-preview.mp3">
+</audio>
+
+<script>
+
+let categorias = [
+"Fantasia",
+"Bolo",
+"Nostalgia",
+"Livro",
+"Filme",
+"Pintura"
+]
+
+function girar(){
+
+let roleta = document.getElementById("roleta")
+let som = document.getElementById("som")
+let resultado = document.getElementById("resultado")
+
+let sorteio = categorias[Math.floor(Math.random()*categorias.length)]
+
+roleta.classList.remove("girando")
+
+void roleta.offsetWidth
+
+roleta.classList.add("girando")
+
+som.currentTime = 0
+som.play()
+
+setTimeout(()=>{
+resultado.innerText = "✨ Tema sorteado: " + sorteio
+},4000)
+
+}
+
+</script>
+
+</body>
+</html>
