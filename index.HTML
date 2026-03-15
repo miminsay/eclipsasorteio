@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Eclipsa Sorteio</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+color:white;
+background:radial-gradient(circle,#300000,#000);
+overflow:hidden;
+}
+
+/* título */
+
+h1{
+font-size:60px;
+margin-bottom:40px;
+
+background:linear-gradient(90deg,#ffd700,#ff0000,#ffd700);
+background-size:200%;
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+animation:shine 4s linear infinite;
+}
+
+@keyframes shine{
+0%{background-position:0%}
+100%{background-position:200%}
+}
+
+/* roleta */
+
+.roleta{
+font-size:180px;
+transition:transform 4s cubic-bezier(.17,.67,.83,.67);
+animation:luz 2s infinite alternate;
+}
+
+@keyframes luz{
+from{filter:drop-shadow(0 0 10px gold)}
+to{filter:drop-shadow(0 0 35px red)}
+}
+
+/* botão */
+
+button{
+margin-top:90px;
+padding:18px 50px;
+font-size:22px;
+background:#c10000;
+color:white;
+border:none;
+border-radius:12px;
+cursor:pointer;
+box-shadow:0 0 20px red;
+}
+
+button:hover{
+background:#ff0000;
+}
+
+/* resultado */
+
+#resultado{
+margin-top:30px;
+font-size:28px;
+font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Eclipsa Sorteio</h1>
+
+<div class="roleta" id="roleta">🎰</div>
+
+<button onclick="girar()">Rodar a Roleta</button>
+
+<p id="resultado"></p>
+
+<!-- som ambiente -->
+<audio autoplay loop>
+<source src="https://cdn.pixabay.com/audio/2023/03/16/audio_1b3d9fcbab.mp3">
+</audio>
+
+<!-- som giro -->
+<audio id="spin">
+<source src="https://cdn.pixabay.com/audio/2022/03/10/audio_c4c4c1cdb3.mp3">
+</audio>
+
+<script>
+
+let roleta=document.getElementById("roleta")
+let som=document.getElementById("spin")
+
+let temas=[
+"Fantasia",
+"Bolo",
+"Nostalgia",
+"Livros",
+"Filmes",
+"Pinturas"
+]
+
+let angulo=0
+
+function girar(){
+
+som.currentTime=0
+som.play()
+
+let giro=Math.floor(Math.random()*360)+2000
+
+angulo+=giro
+
+roleta.style.transform="rotate("+angulo+"deg)"
+
+setTimeout(()=>{
+
+let tema=temas[Math.floor(Math.random()*temas.length)]
+
+document.getElementById("resultado").innerText="Tema sorteado: "+tema
+
+},4000)
+
+}
+
+</script>
+
+</body>
+</html>
